@@ -1,0 +1,24 @@
+<?php
+
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class UpdateClienteRequest extends FormRequest
+{
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    public function rules(): array
+    {
+        return [
+            'nombre' => 'required',
+            'documento' => 'required|unique:clientes,documento,' . $this->cliente->id,
+            'telefono' => 'required',
+            'email' => 'required|email',
+            'historial' => 'nullable'
+        ];
+    }
+}
